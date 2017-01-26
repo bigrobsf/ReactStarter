@@ -1,5 +1,6 @@
 module.exports = {
   entry: [
+    'webpack-dev-server/client?http://localhost:3000',
     './src/index.js'
   ],
   output: {
@@ -9,10 +10,16 @@ module.exports = {
   },
   module: {
     loaders: [{
+      test: /\.jsx?$/,
+      include: path.join(__dirname, 'src'),
       exclude: /node_modules/,
-      loader: 'babel',
+      loaders: ['babel'],
       query: {
         presets: ['react', 'es2015', 'stage-0']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
       }
     }]
   },
